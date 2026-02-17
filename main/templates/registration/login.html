@@ -73,13 +73,13 @@
     <form id="loginForm" method="POST">
         {% csrf_token %}
         <div class="input-group">
-            
-            <td>{{ form.username }}</td>
+            <p>login:</p>
+            <td title="login" onreset="login">{{ form.username }}</td>
         </div>
 
         <div class="input-group">
-            
-            <td>{{ form.password }}</td>
+            <p>password:</p>
+            <td title="password" onreset="password">{{ form.password }}</td>
         </div>
 
         <button type="submit" id="loginBtn" class="login-btn">Подтвердить</button>
@@ -107,9 +107,6 @@
         if (username === '' || password === '') {
             alert('Пожалуйста, заполните все поля');
             return;
-        }else{
-            document.getElementById('loginBtn').addEventListener('click', () => {
-            window.location.replace('../../')
         }
 
         
