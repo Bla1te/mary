@@ -73,12 +73,12 @@
     <form id="loginForm" method="POST">
         {% csrf_token %}
         <div class="input-group">
-            <input type="text" id="username" placeholder="Логин" required>
+            
             <td>{{ form.username }}</td>
         </div>
 
         <div class="input-group">
-            <input type="password" id="password" placeholder="Пароль" required>
+            
             <td>{{ form.password }}</td>
         </div>
 
