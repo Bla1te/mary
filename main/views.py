@@ -6,17 +6,7 @@ def login(request):
     context = {
                 'error': False,
             }
-    if request.method == 'POST':
-        username = request.POST.get('username')
-
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            context['error'] = True
-            #user = User.objects.create_user(username=username)
-        auth_login(request, user)
-        context['index'] = True
-        return redirect("")
+    
 
         
 
