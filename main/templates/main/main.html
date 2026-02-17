@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Форма</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        /* ===== TOP BAR ===== */
+        
+        .top-bar {
+            width: 100%;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            box-sizing: border-box;
+        }
+        
+        .left-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .login-btn {
+            padding: 8px 14px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .login-btn:hover {
+            background-color: #45a049;
+        }
+        
+        .username-display {
+            font-weight: bold;
+
+        }
+        /* ===== MAIN CONTENT ===== */
+        
+        .page-content {
+            height: calc(100vh - 70px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        /* Upload button inside form */
+        
+        .upload-label {
+            display: inline-block;
+            padding: 8px 14px;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .upload-label:hover {
+            background-color: #1976D2;
+        }
+        
+        .upload-input {
+            display: none;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="left-top">
+            {% if request.user.is_authenticated %}
+            
+            <div class="username-display" id="usernameDisplay">{{ user.username }}</div>
+            <a href = "{% url "logout" %}">
+            <button class="logout-btn" id="logoutButton">Выйти</button></a>
+
+            {% else %}
+
+            <a href = "{% url "login" %}">
+            <button class="login-btn" id="loginButton">Войти</button></a>
+            
+            {%endif%}
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="page-content">
+
+        <div class="container">
+            <form id="mainForm">
+
+
+                <div class="form-group" style="width: 50%;">
+                    <label for="imageUpload" class="upload-label">Загрузить задний фон</label>
+                    <input type="file" id="imageUpload" class="upload-input" accept="image/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Кому</label>
+                    <input type="text" id="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Текст приглошения</label>
+                    <textarea id="description" required></textarea>
+                </div>
+
+                <!-- Кнопка загрузки внутри формы -->
+
+
+                <button type="submit" class="submit-btn">Отправить</button>
+
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        const form = document.getElementById('mainForm');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const image = document.getElementById('imageUpload').files.length;
+
+            if (title === '' || description === '' || image === 0) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+
+            alert('Форма успешно отправлена');
+        });
+        
+    </script>
+
+</body>
+
+</html>
