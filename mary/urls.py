@@ -20,5 +20,6 @@ from invitation import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('invitation', include('invitation.urls'))
+    path('invitation', include('invitation.urls')),
+    path('',include('main.urls'))
 ]

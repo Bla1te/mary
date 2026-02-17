@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход в аккаунт</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Окно ошибки */
+        .error-message {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #ffdddd;
+            color: #d8000c;
+            border: 1px solid #d8000c;
+            border-radius: 5px;
+            display: none; /* По умолчанию скрыто */
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Вход</h2>
+
+    <form id="loginForm" method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Логин" required>
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Пароль" required>
+        </div>
+
+        <button type="submit" id="loginBtn" class="login-btn">Подтвердить</button>
+    </form>
+
+    <!-- Объект ошибки (ты сам будешь управлять отображением) -->
+    <div id="userNotFound" class="error-message">
+        Пользователь не найден
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById('loginForm');
+    const errorBlock = document.getElementById('userNotFound');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        
+        if (username === '' || password === '') {
+            alert('Пожалуйста, заполните все поля');
+            return;
+        }else{
+            document.getElementById('loginBtn').addEventListener('click', () => {
+            window.location.replace('../../')
+        }
+
+        
+    })
+        
+    });
+</script>
+
+</body>
+</html>
